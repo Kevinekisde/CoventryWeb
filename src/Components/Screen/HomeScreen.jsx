@@ -5,6 +5,9 @@ import ProcesoHome from '../Section/ProcesoHome';
 import Categorias from '../Section/Categorias';
 import ManchaRosa from '../Assets/mancha_negra_final.png'
 import Logo from '../Assets/logo_club_circular.png'
+import MisionVision from '../Section/MisionVision';
+import InstagramFeed from '../Section/InstagramPost';
+import Chatbot from '../Section/Chatbot';
 
 export default function VolleyballLanding() {
   return (
@@ -12,10 +15,13 @@ export default function VolleyballLanding() {
       
       {/* ========== HERO SECTION ========== */}
       <HeroHome/>
+      <MisionVision/>
+
       {/* ========== Categorias SECTION ========== */}
       <Categorias/>
       {/* ========== PROCESO SIMPLE ========== */}
       <ProcesoHome/>
+      <InstagramFeed/>
 
       {/* ========== CONTACTO ========== */}
       <section id="contacto" className="py-16 md:py-24  text-black relative overflow-hidden">
@@ -129,6 +135,8 @@ export default function VolleyballLanding() {
           </p>
         </div>
       </footer>
+
+      <Chatbot/>
     </div>
   );
 }

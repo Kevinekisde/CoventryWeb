@@ -6,86 +6,72 @@ import { motion } from 'framer-motion'
 
 function HeroHome() {
     return (
-        <section className="relative min-h-screen flex items-center overflow-hidden">
-            {/* Manchas decorativas */}
-            <motion.img
-                src={ManchaRosa}
-                alt=""
-                className="absolute -top-80 -right-36 w-64 md:w-80 lg:w-2/5  opacity-90"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 0.9, x: 0 }}
-                transition={{ duration: 1 }}
-            />
-
-            <motion.img
-                src={ManchaNegra}
-                alt=""
-                className="absolute -bottom-60 -left-72 w-48 md:w-2/5 opacity-80"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 0.8, x: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
-            />
-
-            {/* Logo */}
-            <motion.img
-                src={Logo}
-                alt="Club Atlético Coventry"
-                className="absolute top-6 left-6 md:top-8 md:left-8 w-20 md:w-28 lg:w-32 z-10"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-            />
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-black">
+         
+            {/* Logo centrado - mejorado con efectos */}
+            <motion.div 
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <img
+                    src={Logo}
+                    alt="Club Atlético Coventry Logo"
+                    className="w-[350px] sm:w-[450px] md:w-[600px] lg:w-[600px] xl:w-[900px] 2xl:w-[1200px] opacity-[0.12] md:opacity-[0.1] object-contain"
+                    style={{
+                        filter: 'brightness(1.2) contrast(1.1)',
+                    }}
+                />
+            </motion.div>
 
             {/* Contenido principal */}
-            <div className="container mx-auto px-4 py-20 text-center relative z-10">
+            <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center relative z-10 text-white">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
                 >
-                    <h1 className="font-bebas text-6xl md:text-9xl lg:text-[5rem] 2xl:text-[10rem] uppercase leading-none tracking-tight">
+                    <h1 className="font-bebas text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] xl:text-[9rem] uppercase leading-[0.9] sm:leading-none tracking-tight drop-shadow-2xl px-2">
                         Club Atletico Coventry
                     </h1>
 
-                    <h2 className="font-open-sans text-2xl md:text-3xl lg:text-4xl font-semibold mt-6 text-gray-800">
+                    <h2 className="font-open-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-6 sm:mt-8 text-primary drop-shadow-lg px-2">
                         ¡Inscripciones Abiertas!
                     </h2>
 
-                    <p className="font-open-sans text-lg md:text-xl mt-8 text-gray-700 max-w-2xl mx-auto leading-relaxed">
-                        Donde cada saque es una nueva oportunidad y cada punto<br className="hidden md:block" />
+                    <p className="font-open-sans text-sm sm:text-base md:text-lg lg:text-xl mt-6 sm:mt-10 text-gray-200 max-w-3xl mx-auto leading-relaxed px-4 sm:px-6">
+                        Donde cada saque es una nueva oportunidad y cada punto
                         se celebra en equipo. Únete a nuestra familia voleibolista
                     </p>
                 </motion.div>
 
                 <motion.div
-                    className="mt-12 flex flex-col items-center gap-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    className="mt-10 sm:mt-14 flex flex-col items-center gap-4 sm:gap-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1 }}
                 >
                     <motion.a
                         href="#contacto"
-                        className="bg-[#ff66c1] hover:bg-[#ff4db3] text-white font-bebas text-2xl md:text-3xl px-10 md:px-14 py-4 md:py-5 rounded-full shadow-2xl transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="relative overflow-hidden bg-gradient-to-r from-[#ff66c1] to-[#ff4db3] text-white font-bebas text-xl sm:text-2xl md:text-3xl lg:text-4xl px-10 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-full shadow-lg shadow-[#ff66c1]/40 transition-shadow duration-150 group w-auto max-w-[90%] sm:max-w-none"
+                        whileHover={{ scale: 1.05, y: -3 }}
+                        whileTap={{ scale: 0.98 }}
                     >
-                        Reserva tu Clase de Prueba
+                        {/* Efecto de brillo al hacer hover */}
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                        
+                        <span className="relative z-10 whitespace-nowrap">
+                            Reserva tu Clase de Prueba
+                        </span>
+                        
+                        {/* Borde animado */}
+                        <span className="absolute inset-0 rounded-full border-2 border-white/0 group-hover:border-white/30 transition-all duration-150" />
                     </motion.a>
 
-                    <p className="font-open-sans text-sm text-gray-500">
-                        Gratis · Sin compromiso · Comienza en Diciembre
+                    <p className="font-open-sans text-xs sm:text-sm md:text-base text-gray-400">
+                        Gratis · Sin compromiso
                     </p>
-                </motion.div>
-
-                {/* Scroll indicator */}
-                <motion.div
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                    <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-                        <div className="w-1 h-3 bg-gray-400 rounded-full mt-2"></div>
-                    </div>
                 </motion.div>
             </div>
         </section>
