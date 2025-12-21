@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Trophy, Calendar, Clock, Award } from 'lucide-react';
+import { Users, Trophy, Calendar, Clock, Award, Zap, ArrowRight, Sparkles } from 'lucide-react';
 
 function Categorias() {
     const [activeRama, setActiveRama] = useState(0);
@@ -184,28 +184,105 @@ function Categorias() {
     const currentCategoria = ramas[activeRama].categorias[activeCategoria];
 
     return (
-        <div className='bg-black w-full min-h-screen py-16 md:py-24 relative overflow-hidden'>
-            {/* Fondo decorativo sutil */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-20 right-20 w-96 h-96 bg-[#ff66c1] rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 left-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        <section className='relative bg-white w-full min-h-screen py-20 md:py-32 overflow-hidden' id="categorias">
+            {/* Patrón de red sutil */}
+            <div className="absolute inset-0 opacity-[0.15]">
+                <div 
+                    className="w-full h-full" 
+                    style={{
+                        backgroundImage: `
+                            repeating-linear-gradient(0deg, transparent, transparent 80px, #ff66c1 80px, #ff66c1 81px),
+                            repeating-linear-gradient(90deg, transparent, transparent 80px, #ff66c1 80px, #ff66c1 81px)
+                        `
+                    }}
+                />
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
+            {/* Gradientes decorativos suaves */}
+            <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+            <div className="absolute bottom-20 left-10 w-96 h-96 bg-pink-500/5 rounded-full blur-[120px]" />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.02] rounded-full blur-[150px]" />
+
+            {/* Partículas flotantes */}
+            {[...Array(15)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 bg-primary rounded-full"
+                    style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                        y: [0, -30, 0],
+                        x: [0, Math.random() * 20 - 10, 0],
+                        opacity: [0, 0.6, 0],
+                        scale: [0, 1.5, 0]
+                    }}
+                    transition={{
+                        duration: 4 + Math.random() * 3,
+                        repeat: Infinity,
+                        delay: Math.random() * 5,
+                        ease: "easeInOut"
+                    }}
+                />
+            ))}
+
+            {/* Partículas adicionales más pequeñas */}
+            {[...Array(10)].map((_, i) => (
+                <motion.div
+                    key={`small-${i}`}
+                    className="absolute w-4 h-4 bg-pink-400 rounded-full"
+                    style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                        y: [0, -20, 0],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1, 0]
+                    }}
+                    transition={{
+                        duration: 3 + Math.random() * 2,
+                        repeat: Infinity,
+                        delay: Math.random() * 4,
+                        ease: "easeInOut"
+                    }}
+                />
+            ))}
+
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-12 md:mb-16"
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-16 md:mb-20"
                 >
-                    <h2 className="font-bebas text-5xl md:text-7xl text-white mb-4">
-                        Nuestras Categorías
+                    {/* Badge */}
+                    <motion.div
+                        className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                    >
+                        <Zap className="w-4 h-4 text-primary" />
+                        <span className="font-open-sans text-sm text-gray-800 font-semibold">
+                            Encuentra Tu Equipo
+                        </span>
+                    </motion.div>
+
+                    <h2 className="font-bebas text-5xl md:text-7xl lg:text-8xl uppercase tracking-tight mb-6">
+                        <span className="bg-gradient-to-r from-gray-900 via-black to-gray-900 bg-clip-text text-transparent">
+                            Nuestras
+                        </span>
+                        <br />
+                        <span className="bg-gradient-to-r from-primary via-pink-500 to-primary bg-clip-text text-transparent">
+                            Categorías
+                        </span>
                     </h2>
-                    <p className="font-open-sans text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-                        Encuentra el grupo perfecto para tu edad y nivel.<br className="hidden md:block" />
-                        Todos son bienvenidos en nuestra familia voleibolista.
+                    <p className="font-open-sans text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                        Desde iniciación hasta nivel competitivo. Encuentra tu lugar en la cancha.
                     </p>
                 </motion.div>
 
@@ -215,9 +292,9 @@ function Categorias() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mb-8"
+                    className="mb-12"
                 >
-                    <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                    <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
                         {ramas.map((rama, index) => (
                             <motion.button
                                 key={index}
@@ -226,32 +303,53 @@ function Categorias() {
                                     setActiveCategoria(0);
                                 }}
                                 className={`
-                  font-bebas text-xl md:text-2xl px-8 py-4 rounded-2xl transition-all duration-300
-                  ${activeRama === index
-                                        ? 'bg-primary text-white shadow-xl'
-                                        : 'bg-white text-black hover:bg-primary hover:text-white'
+                                    group relative font-bebas text-lg md:text-xl px-6 py-4 rounded-2xl transition-all duration-300 overflow-hidden
+                                    ${activeRama === index
+                                        ? 'text-white shadow-xl'
+                                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
                                     }
-                `}
-                                whileHover={{ scale: 1.05 }}
+                                `}
+                                whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <div className="text-center">
+                                {activeRama === index && (
+                                    <>
+                                        <motion.div
+                                            className="absolute inset-0 bg-gradient-to-r from-primary to-pink-600"
+                                            layoutId="activeRamaBg"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                        <motion.div
+                                            className="absolute inset-0"
+                                            style={{
+                                                background: 'radial-gradient(circle at center, rgba(255,102,193,0.4) 0%, transparent 70%)',
+                                                filter: 'blur(20px)'
+                                            }}
+                                            animate={{ 
+                                                scale: [1, 1.2, 1],
+                                                opacity: [0.5, 0.8, 0.5]
+                                            }}
+                                            transition={{ duration: 2, repeat: Infinity }}
+                                        />
+                                    </>
+                                )}
+                                <div className="relative z-10 text-center">
                                     <div className="text-2xl mb-1">{index === 0 ? '🎈' : index === 1 ? '🤝' : index === 2 ? '🏆' : '🏐'}</div>
                                     <div>{rama.nombre}</div>
-                                    <div className="text-xs font-open-sans opacity-70">{rama.descripcion}</div>
+                                    <div className="text-[10px] font-open-sans opacity-70">{rama.descripcion}</div>
                                 </div>
                             </motion.button>
                         ))}
                     </div>
                 </motion.div>
 
-                {/* Tabs de Categorías dentro de la rama */}
+                {/* Tabs de Categorías */}
                 <motion.div
                     key={activeRama}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="mb-12"
+                    className="mb-16"
                 >
                     <div className="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
                         {ramas[activeRama].categorias.map((cat, index) => (
@@ -259,16 +357,23 @@ function Categorias() {
                                 key={index}
                                 onClick={() => setActiveCategoria(index)}
                                 className={`
-                  font-bebas text-base md:text-lg px-5 py-3 rounded-full transition-all duration-300
-                  ${activeCategoria === index
-                                        ? 'bg-[#ff66c1] text-white shadow-lg shadow-[#ff66c1]/50'
-                                        : 'bg-white text-black hover:bg-gray-200'
+                                    relative font-bebas text-base md:text-lg px-6 py-3 rounded-full transition-all duration-300 overflow-hidden
+                                    ${activeCategoria === index
+                                        ? 'text-white shadow-lg'
+                                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
                                     }
-                `}
+                                `}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                {cat.icono} {cat.nombre}
+                                {activeCategoria === index && (
+                                    <motion.div
+                                        className="absolute inset-0 bg-gradient-to-r from-primary to-pink-600"
+                                        layoutId="activeCategoriaBg"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{cat.icono} {cat.nombre}</span>
                             </motion.button>
                         ))}
                     </div>
@@ -278,172 +383,214 @@ function Categorias() {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={`${activeRama}-${activeCategoria}`}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
                         className="max-w-6xl mx-auto"
                     >
-                        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
-                            {/* Header de la categoría */}
-                            <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
-                                <div>
-                                    <div className="flex items-center gap-4 mb-3">
-                                        <span className="text-5xl">{currentCategoria.icono}</span>
-                                        <h3 className="font-bebas text-4xl md:text-5xl text-black">
-                                            {currentCategoria.nombre}
-                                        </h3>
-                                    </div>
-                                    <div className="flex items-center gap-3 flex-wrap">
-                                        <span className="bg-[#ff66c1] text-white font-bebas text-sm px-4 py-1 rounded-full">
-                                            {currentCategoria.edad}
-                                        </span>
-                                        <span className="bg-black text-white font-bebas text-sm px-4 py-1 rounded-full">
-                                            {currentCategoria.nivel}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-100 overflow-hidden">
+                            {/* Gradiente decorativo sutil */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/5 to-pink-500/5 rounded-full blur-3xl" />
+                            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl" />
+                            
+                            {/* Línea decorativa */}
+                            <motion.div 
+                                className="absolute left-0 top-0 w-1 h-0 bg-gradient-to-b from-primary to-pink-600 rounded-r-full"
+                                initial={{ height: 0 }}
+                                animate={{ height: "100%" }}
+                                transition={{ duration: 1, delay: 0.3 }}
+                            />
 
-                            {/* Descripción */}
-                            <p className="font-open-sans text-lg text-gray-700 mb-8 leading-relaxed">
-                                {currentCategoria.descripcion}
-                            </p>
-
-                            {/* Grid de Info */}
-                            <div className="grid md:grid-cols-2 gap-6 mb-8">
-                                {/* Horarios por día */}
-                                <motion.div
-                                    className="bg-gray-50 rounded-2xl p-6 border border-gray-200"
-                                    whileHover={{ scale: 1.02 }}
-                                >
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <Calendar className="text-[#ff66c1]" size={28} />
-                                        <h4 className="font-bebas text-2xl text-black">Horarios</h4>
-                                    </div>
-                                    <div className="space-y-3">
-                                        {currentCategoria.horarios.map((horario, idx) => (
-                                            <div key={idx} className="flex items-center justify-between bg-white rounded-lg p-3 shadow-sm">
-                                                <div className="flex items-center gap-3">
-                                                    <Calendar className="text-[#ff66c1]" size={20} />
-                                                    <span className="font-bebas text-lg text-black">{horario.dia}</span>
-                                                </div>
-                                                <div className="flex items-center gap-2">
-                                                    <Clock className="text-gray-500" size={18} />
-                                                    <span className="font-open-sans text-sm text-gray-700 font-semibold">
-                                                        {horario.hora}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </motion.div>
-
-                                {/* Ligas */}
-                                <motion.div
-                                    className="bg-gray-50 rounded-2xl p-6 border border-gray-200"
-                                    whileHover={{ scale: 1.02 }}
-                                >
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <Trophy className="text-[#ff66c1]" size={28} />
-                                        <h4 className="font-bebas text-2xl text-black">Competencias</h4>
-                                    </div>
-                                    {currentCategoria.ligas.length > 0 ? (
-                                        <ul className="font-open-sans text-sm text-gray-700 space-y-3">
-                                            {currentCategoria.ligas.map((liga, idx) => (
-                                                <li key={idx} className="flex items-start gap-2 bg-white rounded-lg p-3 shadow-sm">
-                                                    <Award className="text-[#ff66c1] flex-shrink-0 mt-0.5" size={18} />
-                                                    <span>{liga}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    ) : (
-                                        <p className="font-open-sans text-sm text-gray-500 italic bg-white rounded-lg p-4">
-                                            Enfoque recreativo y formativo
-                                        </p>
-                                    )}
-                                </motion.div>
-                            </div>
-
-                            {/* Galería de fotos */}
-                            {currentCategoria.fotos.length > 0 && (
-                                <div className="mb-8">
-                                    <h4 className="font-bebas text-3xl text-black mb-4 flex items-center gap-2">
-                                        📸 Galería
-                                    </h4>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        {currentCategoria.fotos.map((foto, idx) => (
-                                            <motion.div
-                                                key={idx}
-                                                className="aspect-square bg-gray-200 rounded-2xl overflow-hidden"
-                                                whileHover={{ scale: 1.05 }}
+                            <div className="relative z-10">
+                                {/* Header */}
+                                <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
+                                    <div>
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <motion.span 
+                                                className="text-6xl"
+                                                animate={{ rotate: [0, 10, -10, 0] }}
+                                                transition={{ duration: 0.5 }}
                                             >
-                                                <img
-                                                    src={foto}
-                                                    alt={`${currentCategoria.nombre} ${idx + 1}`}
-                                                    className="w-full h-full object-cover"
-                                                    onError={(e) => {
-                                                        e.target.src = 'https://via.placeholder.com/300x300/ff66c1/ffffff?text=' + currentCategoria.icono;
-                                                    }}
-                                                />
-                                            </motion.div>
-                                        ))}
+                                                {currentCategoria.icono}
+                                            </motion.span>
+                                            <h3 className="font-bebas text-4xl md:text-5xl text-gray-900 leading-none">
+                                                {currentCategoria.nombre}
+                                            </h3>
+                                        </div>
+                                        <div className="flex items-center gap-3 flex-wrap">
+                                            <span className="bg-gradient-to-r from-primary to-pink-600 text-white font-bebas text-sm px-5 py-2 rounded-full shadow-lg">
+                                                {currentCategoria.edad}
+                                            </span>
+                                            <span className="bg-gray-100 text-gray-900 font-bebas text-sm px-5 py-2 rounded-full border border-gray-200">
+                                                {currentCategoria.nivel}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            )}
 
-                            {/* CTA */}
-                            <motion.div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <motion.a
-                                    href="#contacto"
-                                    className="bg-[#ff66c1] hover:bg-[#ff4db3] text-white font-bebas text-xl px-8 py-4 rounded-full text-center shadow-lg transition-colors"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    Inscribirse en esta Categoría
-                                </motion.a>
+                                {/* Descripción */}
+                                <p className="font-open-sans text-lg text-gray-700 mb-10 leading-relaxed bg-primary/5 p-6 rounded-2xl border border-primary/10">
+                                    {currentCategoria.descripcion}
+                                </p>
 
-                                <motion.a
-                                    href="#contacto"
-                                    className="bg-black hover:bg-gray-800 text-white font-bebas text-xl px-8 py-4 rounded-full text-center transition-colors"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    Más Información
-                                </motion.a>
-                            </motion.div>
+                                {/* Grid de Info */}
+                                <div className="grid md:grid-cols-2 gap-6 mb-10">
+                                    {/* Horarios */}
+                                    <motion.div
+                                        className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all"
+                                        whileHover={{ y: -5 }}
+                                    >
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-12 h-12 bg-gradient-to-br from-primary to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                                                <Calendar className="text-white" size={24} />
+                                            </div>
+                                            <h4 className="font-bebas text-2xl text-gray-900">Horarios</h4>
+                                        </div>
+                                        <div className="space-y-3">
+                                            {currentCategoria.horarios.map((horario, idx) => (
+                                                <div key={idx} className="flex items-center justify-between bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-2 h-2 bg-primary rounded-full" />
+                                                        <span className="font-bebas text-lg text-gray-900">{horario.dia}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <Clock className="text-gray-500" size={16} />
+                                                        <span className="font-open-sans text-sm text-gray-700 font-semibold">
+                                                            {horario.hora}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Ligas */}
+                                    <motion.div
+                                        className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all"
+                                        whileHover={{ y: -5 }}
+                                    >
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-12 h-12 bg-gradient-to-br from-primary to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                                                <Trophy className="text-white" size={24} />
+                                            </div>
+                                            <h4 className="font-bebas text-2xl text-gray-900">Competencias</h4>
+                                        </div>
+                                        {currentCategoria.ligas.length > 0 ? (
+                                            <ul className="font-open-sans text-sm text-gray-700 space-y-3">
+                                                {currentCategoria.ligas.map((liga, idx) => (
+                                                    <li key={idx} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                                                        <Award className="text-primary flex-shrink-0 mt-0.5" size={18} />
+                                                        <span>{liga}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <p className="font-open-sans text-sm text-gray-500 italic bg-white rounded-xl p-4 border border-gray-100">
+                                                Enfoque recreativo y formativo
+                                            </p>
+                                        )}
+                                    </motion.div>
+                                </div>
+
+                                {/* Galería */}
+                                {currentCategoria.fotos.length > 0 && (
+                                    <div className="mb-10">
+                                        <h4 className="font-bebas text-3xl text-gray-900 mb-6 flex items-center gap-3">
+                                            <Sparkles className="text-primary" size={28} />
+                                            Galería
+                                        </h4>
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                            {currentCategoria.fotos.map((foto, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    className="aspect-square bg-gray-100 rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-primary/50 transition-all"
+                                                    whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(255,102,193,0.2)" }}
+                                                >
+                                                    <img
+                                                        src={foto}
+                                                        alt={`${currentCategoria.nombre} ${idx + 1}`}
+                                                        className="w-full h-full object-cover"
+                                                        onError={(e) => {
+                                                            e.target.src = 'https://via.placeholder.com/300x300/ff66c1/ffffff?text=' + currentCategoria.icono;
+                                                        }}
+                                                    />
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* CTAs */}
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <motion.a
+                                        href="#contacto"
+                                        className="group relative overflow-hidden bg-gradient-to-r from-primary to-pink-600 text-white font-bebas text-xl px-10 py-5 rounded-full text-center shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                    >
+                                        <span className="relative z-10">Inscribirse Ahora</span>
+                                        <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                                        <motion.span
+                                            className="absolute inset-0 bg-gradient-to-r from-pink-600 to-primary"
+                                            initial={{ x: '-100%' }}
+                                            whileHover={{ x: '100%' }}
+                                            transition={{ duration: 0.6 }}
+                                        />
+                                    </motion.a>
+
+                                    <motion.a
+                                        href="#contacto"
+                                        className="group font-bebas text-xl px-10 py-5 rounded-full text-center border-2 border-gray-300 hover:border-primary text-gray-900 hover:text-primary flex items-center justify-center gap-3 transition-all"
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                    >
+                                        Más Información
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </motion.a>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </AnimatePresence>
 
-                {/* Info adicional */}
+                {/* CTA final */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="mt-16 text-center"
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="mt-20 max-w-4xl mx-auto"
                 >
-                    <div className="bg-white rounded-2xl p-8 max-w-3xl mx-auto shadow-xl">
-                        <Users className="text-[#ff66c1] mx-auto mb-4" size={48} />
-                        <h3 className="font-bebas text-3xl text-black mb-3">
-                            ¿No sabes qué categoría elegir?
-                        </h3>
-                        <p className="font-open-sans text-gray-700 mb-6">
-                            Contáctanos y te ayudaremos a encontrar el grupo ideal para ti
-                        </p>
-                        <motion.a
-                            href="#contacto"
-                            className="inline-block bg-black hover:bg-gray-800 text-white font-bebas text-xl px-8 py-3 rounded-full transition-colors"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Hablar con un Asesor
-                        </motion.a>
+                    <div className="relative bg-gradient-to-br from-black to-black rounded-3xl p-10 md:p-12 overflow-hidden text-center shadow-2xl">
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+                            animate={{ x: ['-100%', '100%'] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        />
+                        
+                        <div className="relative z-10">
+                            <Users className="text-primary mx-auto mb-6" size={56} />
+                            <h3 className="font-bebas text-4xl text-white mb-4">
+                                ¿No sabes qué categoría elegir?
+                            </h3>
+                            <p className="font-open-sans text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                                Nuestro equipo te ayudará a encontrar el grupo perfecto según tu edad, nivel y objetivos
+                            </p>
+                            <motion.a
+                                href="#contacto"
+                                className="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-pink-600 text-white font-bebas text-xl px-10 py-5 rounded-full shadow-lg hover:shadow-xl"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <span>Hablar con un Asesor</span>
+                                <ArrowRight className="w-5 h-5" />
+                            </motion.a>
+                        </div>
                     </div>
                 </motion.div>
             </div>
-        </div>
+        </section>
     );
 }
 
