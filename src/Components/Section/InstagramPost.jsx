@@ -116,94 +116,49 @@ function InstagramFeed() {
                     </motion.div>
 
                     <div className="max-w-5xl mx-auto">
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {/* Paso 1 */}
-                            <motion.div
-                                className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-primary/30 transition-all text-center group"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                whileHover={{ y: -10 }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                                
-                                <motion.div 
-                                    className="relative w-24 h-24 bg-gradient-to-br from-primary to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 font-bebas text-5xl shadow-[0_0_30px_rgba(255,102,193,0.4)] text-white"
-                                    whileHover={{ rotate: 360 }}
-                                    transition={{ duration: 0.6 }}
+                        <motion.div
+                            className="grid md:grid-cols-3 gap-8"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: '-60px' }}
+                            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.18, delayChildren: 0.1 } } }}
+                        >
+                            {[
+                                { num: '1', title: 'Contáctanos', desc: 'Escríbenos por WhatsApp o Instagram', grad: 'from-primary to-pink-600' },
+                                { num: '2', title: 'Ven a Probar', desc: 'Tu primera clase es completamente gratis', grad: 'from-pink-600 to-primary' },
+                                { num: '3', title: 'Únete', desc: 'Si te gusta, bienvenido a la familia', grad: 'from-primary to-pink-600' },
+                            ].map((paso, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-primary/30 transition-colors text-center group overflow-hidden"
+                                    variants={{
+                                        hidden: { opacity: 0, scale: 0.75, rotate: idx % 2 === 0 ? -6 : 6 },
+                                        visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: 'spring', stiffness: 160, damping: 16 } },
+                                    }}
+                                    whileHover={{ y: -10, transition: { type: 'spring', stiffness: 300, damping: 18 } }}
                                 >
-                                    1
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
+                                    <motion.div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-pink-600 rounded-b-3xl scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-center" />
+
+                                    <motion.div
+                                        className={`relative w-24 h-24 bg-gradient-to-br ${paso.grad} rounded-2xl flex items-center justify-center mx-auto mb-6 font-bebas text-5xl shadow-[0_0_30px_rgba(255,102,193,0.4)] text-white`}
+                                        whileHover={{ scale: 1.15, rotate: [0, -8, 8, 0] }}
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        {paso.num}
+                                        {/* Anillo pulsante */}
+                                        <motion.div
+                                            className="absolute inset-0 border-2 border-primary rounded-2xl"
+                                            animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0, 0.6] }}
+                                            transition={{ duration: 2.5, repeat: Infinity, delay: idx * 0.5 }}
+                                        />
+                                    </motion.div>
+
+                                    <h3 className="font-bebas text-3xl lg:text-4xl text-white mb-3">{paso.title}</h3>
+                                    <p className="font-open-sans text-gray-300 leading-relaxed">{paso.desc}</p>
                                 </motion.div>
-                                
-                                <h3 className="font-bebas text-3xl lg:text-4xl text-white mb-3">Contáctanos</h3>
-                                <p className="font-open-sans text-gray-300 leading-relaxed">
-                                    Escríbenos por WhatsApp o Instagram
-                                </p>
-
-                                <motion.div 
-                                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-pink-600 rounded-b-3xl opacity-0 group-hover:opacity-100 transition-opacity"
-                                />
-                            </motion.div>
-
-                            {/* Paso 2 */}
-                            <motion.div
-                                className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-primary/30 transition-all text-center group"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                whileHover={{ y: -10 }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                                
-                                <motion.div 
-                                    className="relative w-24 h-24 bg-gradient-to-br from-pink-600 to-primary rounded-2xl flex items-center justify-center mx-auto mb-6 font-bebas text-5xl shadow-[0_0_30px_rgba(255,102,193,0.4)] text-white"
-                                    whileHover={{ rotate: 360 }}
-                                    transition={{ duration: 0.6 }}
-                                >
-                                    2
-                                </motion.div>
-                                
-                                <h3 className="font-bebas text-3xl lg:text-4xl text-white mb-3">Ven a Probar</h3>
-                                <p className="font-open-sans text-gray-300 leading-relaxed">
-                                    Tu primera clase es completamente gratis
-                                </p>
-
-                                <motion.div 
-                                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-pink-600 rounded-b-3xl opacity-0 group-hover:opacity-100 transition-opacity"
-                                />
-                            </motion.div>
-
-                            {/* Paso 3 */}
-                            <motion.div
-                                className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-primary/30 transition-all text-center group"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4 }}
-                                whileHover={{ y: -10 }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                                
-                                <motion.div 
-                                    className="relative w-24 h-24 bg-gradient-to-br from-primary to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 font-bebas text-5xl shadow-[0_0_30px_rgba(255,102,193,0.4)] text-white"
-                                    whileHover={{ rotate: 360 }}
-                                    transition={{ duration: 0.6 }}
-                                >
-                                    3
-                                </motion.div>
-                                
-                                <h3 className="font-bebas text-3xl lg:text-4xl text-white mb-3">Únete</h3>
-                                <p className="font-open-sans text-gray-300 leading-relaxed">
-                                    Si te gusta, bienvenido a la familia
-                                </p>
-
-                                <motion.div 
-                                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-pink-600 rounded-b-3xl opacity-0 group-hover:opacity-100 transition-opacity"
-                                />
-                            </motion.div>
-                        </div>
+                            ))}
+                        </motion.div>
                     </div>
                 </div>
             </section>
