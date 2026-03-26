@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowRight } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../Assets/logo_club_circular.png'
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -19,6 +21,12 @@ function Navbar() {
     { label: 'Categorías', href: '#categorias' },
     { label: 'Contacto', href: '#contacto' },
   ]
+
+  const handleAnchor = (href) => {
+    setIsMobileOpen(false)
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -35,7 +43,7 @@ function Navbar() {
         <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#inicio" className="flex items-center gap-3 group">
+            <button onClick={() => handleAnchor('#inicio')} className="flex items-center gap-3 group">
               <motion.img
                 src={Logo}
                 alt="Club Atlético Coventry"
@@ -49,33 +57,47 @@ function Navbar() {
                   Coventry
                 </p>
               </div>
-            </a>
+            </button>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
+                  onClick={() => handleAnchor(link.href)}
                   className="relative font-open-sans text-sm font-semibold text-gray-300 hover:text-white transition-colors duration-200 uppercase tracking-widest group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-                </a>
+                </button>
               ))}
+
+              {/* Separador */}
+              <div className="w-px h-5 bg-white/20" />
+
+              {/* Link Futsal */}
+              <Link to="/futsal">
+                <motion.div
+                  className="flex items-center gap-2 font-bebas text-base px-4 py-1.5 rounded-full border border-[#f97316]/40 text-[#f97316] hover:bg-[#f97316]/10 transition-all"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  ⚽ Futsal
+                </motion.div>
+              </Link>
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
-              <motion.a
-                href="#contacto"
+              <motion.button
+                onClick={() => handleAnchor('#contacto')}
                 className="flex items-center gap-2 bg-gradient-to-r from-primary to-pink-600 text-white font-bebas text-lg px-6 py-2.5 rounded-full shadow-[0_0_20px_rgba(255,102,193,0.35)] transition-all"
                 whileHover={{ scale: 1.05, boxShadow: '0 0 35px rgba(255,102,193,0.55)' }}
                 whileTap={{ scale: 0.96 }}
               >
                 Inscríbete
                 <ArrowRight className="w-4 h-4" />
-              </motion.a>
+              </motion.button>
             </div>
 
             {/* Mobile Toggle */}
@@ -100,42 +122,55 @@ function Navbar() {
             exit={{ opacity: 0, clipPath: 'circle(0% at top right)' }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
-            {/* Gradient decorativo */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
 
             <nav className="flex flex-col gap-2">
               {navLinks.map((link, idx) => (
-                <motion.a
+                <motion.button
                   key={link.href}
-                  href={link.href}
-                  className="font-bebas text-5xl text-white hover:text-primary transition-colors py-3 border-b border-white/10"
+                  onClick={() => handleAnchor(link.href)}
+                  className="font-bebas text-5xl text-white hover:text-primary transition-colors py-3 border-b border-white/10 text-left"
                   initial={{ opacity: 0, x: -40 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + idx * 0.08 }}
-                  onClick={() => setIsMobileOpen(false)}
                 >
                   {link.label}
-                </motion.a>
+                </motion.button>
               ))}
+
+              {/* Futsal mobile link */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 + navLinks.length * 0.08 }}
+                className="py-3 border-b border-white/10"
+              >
+                <Link
+                  to="/futsal"
+                  onClick={() => setIsMobileOpen(false)}
+                  className="font-bebas text-5xl text-[#f97316] hover:text-orange-400 transition-colors"
+                >
+                  ⚽ Futsal
+                </Link>
+              </motion.div>
             </nav>
 
-            <motion.a
-              href="#contacto"
+            <motion.button
+              onClick={() => handleAnchor('#contacto')}
               className="mt-10 flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-pink-600 text-white font-bebas text-2xl py-5 rounded-2xl shadow-[0_0_40px_rgba(255,102,193,0.4)]"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-              onClick={() => setIsMobileOpen(false)}
+              transition={{ delay: 0.5 }}
             >
               Inscríbete Ahora
               <ArrowRight className="w-6 h-6" />
-            </motion.a>
+            </motion.button>
 
             <motion.p
               className="mt-6 text-center font-open-sans text-sm text-gray-500"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.55 }}
+              transition={{ delay: 0.6 }}
             >
               Clase de prueba 100% gratis
             </motion.p>
