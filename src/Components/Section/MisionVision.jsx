@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Target, Eye, Award, Zap, Shield, TrendingUp, Users, Heart, Star, Trophy, Handshake } from 'lucide-react'
+import { Target, Eye, Zap, Shield, TrendingUp, Users, Heart, Star, Trophy, Handshake } from 'lucide-react'
 
 const values = [
   { icon: Users, title: 'Trabajo en Equipo', description: 'Juntos somos más fuertes. Cada punto es un logro colectivo que celebramos en familia.', gradient: 'from-primary to-pink-600' },
@@ -31,15 +31,6 @@ const cardVariants = (idx) => ({
   },
 })
 
-// Reveal de sección con clipPath
-const sectionReveal = {
-  hidden: { clipPath: 'inset(0 0 100% 0)', opacity: 0 },
-  visible: {
-    clipPath: 'inset(0 0 0% 0)',
-    opacity: 1,
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-}
 
 // Container stagger
 const staggerContainer = (stagger = 0.1, delay = 0) => ({

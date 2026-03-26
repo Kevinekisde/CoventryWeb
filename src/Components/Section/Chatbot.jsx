@@ -102,7 +102,7 @@ function Chatbot() {
     const findResponse = (userMessage) => {
         const lowerMessage = userMessage.toLowerCase()
         
-        for (const [key, data] of Object.entries(faqData)) {
+        for (const [, data] of Object.entries(faqData)) {
             if (data.keywords.some(keyword => lowerMessage.includes(keyword))) {
                 return data.response
             }

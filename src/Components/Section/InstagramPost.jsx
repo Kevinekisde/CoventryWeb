@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Instagram, ExternalLink, Zap, ArrowRight } from 'lucide-react'
+import { Instagram, Zap, ArrowRight } from 'lucide-react'
 import { InstagramEmbed } from 'react-social-media-embed'
 
 function InstagramFeed() {

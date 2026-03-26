@@ -261,6 +261,7 @@ function Lightbox({ items, startIndex, onClose }) {
           >
             {ytId ? (
               <iframe
+                title="Video de categoría"
                 src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
                 className="w-full aspect-video rounded-2xl"
                 allow="autoplay; fullscreen"

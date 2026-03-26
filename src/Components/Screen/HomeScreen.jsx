@@ -1,9 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Instagram, Phone, MapPin, Volleyball, Users, Calendar, Clock } from 'lucide-react';
+import { Instagram, Phone, Volleyball } from 'lucide-react';
 import HeroHome from '../Section/HeroHome';
-import ProcesoHome from '../Section/ProcesoHome';
 import Categorias from '../Section/Categorias';
-import ManchaRosa from '../Assets/mancha_negra_final.png'
 import Logo from '../Assets/logo_club_circular.png'
 import MisionVision from '../Section/MisionVision';
 import InstagramFeed from '../Section/InstagramPost';
